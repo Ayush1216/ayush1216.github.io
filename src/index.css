@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+/* Design tokens. Every color, face and texture in the city lives here. */
+@theme {
+  --color-ink: #0d0d0f;
+  --color-asphalt-950: #121316;
+  --color-asphalt-900: #18191d;
+  --color-asphalt-800: #222429;
+  --color-asphalt-700: #30333a;
+  --color-asphalt-500: #555a63;
+  --color-asphalt-300: #9a9fa8; /* lowest gray allowed for text on ink (AA) */
+  --color-asphalt-100: #d6d8dc;
+  --color-lamp: #e8c36a;
+  --color-lamp-dim: #a8873f;
+  --color-manila: #d9c08c;
+  --color-manila-dark: #b59a64;
+  --color-paper: #ece3cf;
+  --color-cork: #6b4a2e;
+  --color-cork-dark: #4a321e;
+  --color-thread: #b3202a; /* strings and stamps only, too dark for text on ink */
+  --color-typed: #2a2622; /* ink on paper */
+
+  --font-type: "Special Elite", "Courier New", monospace;
+  --font-display: "Oswald", "Arial Narrow", sans-serif;
+  --font-body: "Source Serif 4", Georgia, serif;
+}
+
+@layer base {
+  :root {
+    --fibers: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.04 .6' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .25 0 0 0 .18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+  }
+  html {
+    background: var(--color-ink);
+    color: var(--color-asphalt-100);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-lamp);
+    outline-offset: 3px;
+  }
+}
+
+/* Film grain: SVG turbulence, no image files. */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 0.6s steps(3) infinite;
+}
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  33% { transform: translate(-3%, 2%); }
+  66% { transform: translate(2%, -3%); }
+}
+
+.vignette {
+  background: radial-gradient(ellipse at center, transparent 45%, rgb(0 0 0 / 0.75) 100%);
+}
+
+/* Paper with fibers. */
+.paper {
+  background-color: var(--color-paper);
+  background-image: var(--fibers);
+  color: var(--color-typed);
+}
+.manila {
+  background-color: var(--color-manila);
+  background-image: var(--fibers);
+  color: var(--color-typed);
+}
+
+/* Coffee ring stain. */
+.coffee-ring {
+  border-radius: 50%;
+  background: radial-gradient(circle, transparent 58%, rgb(110 70 30 / 0.28) 61%, rgb(110 70 30 / 0.12) 66%, transparent 70%);
+}
+
+/* Evidence photo: white border and shadow; the film filter applies to the picture, not the pin. */
+.evidence-film {
+  filter: grayscale(1) sepia(0.25) contrast(1.1);
+}
+.evidence-photo {
+  background: #f4f1ea;
+  padding: 8px 8px 28px;
+  box-shadow: 0 6px 18px rgb(0 0 0 / 0.5);
+}
+
+/* Rubber stamp. */
+.stamp {
+  font-family: var(--font-display);
+  color: var(--color-thread);
+  border: 3px solid currentColor;
+  padding: 0.1em 0.5em;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  mix-blend-mode: multiply;
+  opacity: 0.85;
+}
+
+/* Lamp flicker on load. */
+@keyframes lamp-on {
+  0%, 8% { opacity: 0; }
+  10% { opacity: 0.9; }
+  13% { opacity: 0.1; }
+  20% { opacity: 1; }
+  24% { opacity: 0.3; }
+  30%, 100% { opacity: 1; }
+}
+.lamp-on { animation: lamp-on 0.9s linear both; }
+
+@keyframes neon-buzz {
+  0%, 92%, 100% { opacity: 1; }
+  93% { opacity: 0.3; }
+  95% { opacity: 0.9; }
+  96% { opacity: 0.2; }
+}
+.neon-buzz { animation: neon-buzz 6s infinite; }
+
+@keyframes caret { 50% { opacity: 0; } }
+.caret { animation: caret 1s steps(1) infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .grain::after, .lamp-on, .neon-buzz, .caret { animation: none; }
+}

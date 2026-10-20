@@ -1,0 +1,6 @@
+node_modules
+dist
+notes/
+/Resume_Ayush_Parikh*.pdf
+tsconfig.tsbuildinfo
+.DS_Store

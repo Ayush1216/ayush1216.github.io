@@ -1,0 +1,6 @@
+{
+  "_note": "Set url to the deployed origin (no trailing slash), e.g. https://ayush1216.github.io/portfolio or https://case-files.vercel.app. Used for canonical links, Open Graph images and the sitemap.",
+  "url": "",
+  "title": "Case Files · Ayush Parikh",
+  "description": "Ayush Parikh, Software Engineer (AI/ML + backend systems). Eight closed cases: AI agents, LLM evaluation, distributed systems and ML pipelines."
+}

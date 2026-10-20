@@ -1,0 +1,152 @@
+{
+  "_note": "Service record shown in The Dossier. stack = the chips under each role (taken from that role's bullets). Numbers in bullets are highlighted automatically.",
+  "agent": {
+    "name": "Ayush Parikh",
+    "badge": "Software Engineer · AI/ML + Backend Systems",
+    "status": "Active duty"
+  },
+  "serviceRecord": [
+    {
+      "fileNo": "SR-01",
+      "company": "Easely Dunn Productions",
+      "role": "Software Engineer",
+      "location": "Remote, United States",
+      "start": "2026-07",
+      "end": null,
+      "bullets": [
+        "Built asynchronous OCR pipeline with Go, Qwen3-VL, and AWS S3/SQS, using Claude Code to improve veterinary report extraction accuracy by 25%",
+        "Deployed OpenAI function-calling pipeline with Pydantic schema validation for structured field extraction (diagnosis, medication, dosage, abnormal values) and confidence-scored triage, reducing manual chart review time by 35%",
+        "Developed two-sided veterinary platform with Django, PostgreSQL, and Next.js, enforcing JWT/RBAC access for 1,000+ reports, with Grafana and Redis cutting API latency by 30%"
+      ],
+      "stack": [
+        "Go",
+        "Qwen3-VL",
+        "AWS S3/SQS",
+        "OpenAI API",
+        "Pydantic",
+        "Django",
+        "PostgreSQL",
+        "Next.js",
+        "Redis",
+        "Grafana"
+      ]
+    },
+    {
+      "fileNo": "SR-02",
+      "company": "Frictionless Intelligence",
+      "role": "Software Engineering Intern",
+      "location": "Remote, United States",
+      "start": "2026-02",
+      "end": "2026-05",
+      "bullets": [
+        "Built a LangChain- and OpenAI-powered chatbot that ingests startup details from real-time Kafka and PostgreSQL pipelines to score startups across 91 dimensions, cutting investor diligence report generation to under 3 minutes",
+        "Shipped 4 production features for an AI startup intelligence platform using TypeScript, Next.js, and GraphQL, accelerating delivery by 45% through Claude Code and GitHub Copilot agentic workflows",
+        "Deployed and monitored microservices on AWS using Terraform and Docker/Kubernetes, with CloudWatch dashboards serving 2,000+ startups and 15K+ investor accounts"
+      ],
+      "stack": [
+        "LangChain",
+        "OpenAI API",
+        "Kafka",
+        "PostgreSQL",
+        "TypeScript",
+        "Next.js",
+        "GraphQL",
+        "Terraform",
+        "Kubernetes",
+        "AWS"
+      ]
+    },
+    {
+      "fileNo": "SR-03",
+      "company": "University of Southern California (SCEC)",
+      "role": "Software Engineer, Student Worker",
+      "location": "Los Angeles, CA",
+      "start": "2025-06",
+      "end": "2026-05",
+      "bullets": [
+        "Rebuilt public-facing websites with Next.js and React.js using Claude Code to accelerate boilerplate and routing, improving load times by 40% and site visits by 25%",
+        "Migrated legacy PHP backend to scalable Node.js REST APIs on AWS using GitHub Copilot to accelerate endpoint generation, enabling 3x faster data retrieval",
+        "Automated content deployment pipelines with AWS S3 and Lambda, reducing manual updates by 80% and enabling non-technical teams to publish independently"
+      ],
+      "stack": [
+        "Next.js",
+        "React",
+        "Node.js",
+        "AWS S3",
+        "AWS Lambda"
+      ]
+    },
+    {
+      "fileNo": "SR-04",
+      "company": "LifeSizeAgent AI",
+      "role": "AI Software Engineering Intern",
+      "location": "Remote, United States",
+      "start": "2025-03",
+      "end": "2025-06",
+      "bullets": [
+        "Built conversational AI system using Python, LangChain, and Ollama LLMs with RAG architecture and ChromaDB vector DB, working with ML leads to define evaluation benchmarks and reach 95% query accuracy",
+        "Developed full-stack interface with React and FastAPI, running code reviews on 10 REST endpoints used by 50+ users, improving responsiveness",
+        "Created MLOps infrastructure with automated configuration management, reducing deployment time by 70% and enabling zero-downtime updates"
+      ],
+      "stack": [
+        "Python",
+        "LangChain",
+        "Ollama",
+        "RAG",
+        "ChromaDB",
+        "React",
+        "FastAPI"
+      ]
+    },
+    {
+      "fileNo": "SR-05",
+      "company": "Pro Thoughts Solutions",
+      "role": "Data Science Intern",
+      "location": "Mumbai, India",
+      "start": "2023-06",
+      "end": "2023-12",
+      "bullets": [
+        "Implemented Random Forest and AdaBoost models in an Agile environment, collaborating with project managers to define model requirements and achieve 15% improvement in project workflows",
+        "Designed LSTM networks with TensorFlow for project delay forecasting, reducing prediction errors by 37% and improving risk assessment accuracy to 89%",
+        "Processed 50K+ monthly data points with SQL, NumPy, and Pandas; generated 12 automated PowerBI dashboards, reducing reporting time by 40%"
+      ],
+      "stack": [
+        "TensorFlow",
+        "Random Forest",
+        "AdaBoost",
+        "SQL",
+        "pandas",
+        "NumPy",
+        "Power BI"
+      ]
+    }
+  ],
+  "training": [
+    {
+      "school": "University of Southern California",
+      "degree": "Master of Science in Computer Science",
+      "start": "2024-08",
+      "end": "2026-05",
+      "gpa": "3.96"
+    },
+    {
+      "school": "DJ Sanghvi College of Engineering, University of Mumbai",
+      "degree": "B.Tech in Computer Engineering",
+      "start": "2020-12",
+      "end": "2024-05",
+      "gpa": "3.78 (CGPA)"
+    }
+  ],
+  "commendations": [
+    {
+      "category": "Leadership",
+      "date": "2023-01",
+      "text": "Volunteered with Parisar Asha to tutor underprivileged students in grades 7 to 9, using animations and pictorial representations to teach Mathematics and Physics"
+    },
+    {
+      "category": "Leadership",
+      "date": "2020–2023",
+      "text": "Led teams in hackathons including DJSCE ACM's LOC 5.0, TSEC HACKS, DJS S4DS' SKYJACK, and KJSCE's Feynwick programming contest"
+    }
+  ]
+}

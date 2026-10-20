@@ -1,0 +1,720 @@
+{
+  "_note": "Featured cases appear on the corkboard and get a /case/<number> page. boardTags are the corkboard index cards (keep the vocabulary small). Cold cases are the filing-cabinet list.",
+  "featured": [
+    {
+      "caseNumber": "001",
+      "codename": "The Accomplices Who Did Nothing",
+      "repo": "Ayush1216/PocketAgent",
+      "realTitle": "Pocket Agent",
+      "oneLiner": "An AI coding agent that runs entirely in a browser tab, with the model on the visitor's GPU and Python in a sandboxed worker, plus a benchmark of which harness features actually help a small model.",
+      "status": "Closed",
+      "dateOpened": "2026-09",
+      "dateClosed": "2026-09",
+      "theProblem": "Small open models can run on a laptop for free but are weak at coding. The common fix is a better harness (plan, run, read errors, retry). The question was how much harness design can make up for a small model, and which parts of it actually help.",
+      "investigation": [
+        "Ran everything in the browser: the model on WebGPU through WebLLM, and the code in a Pyodide worker with no network that gets killed and restarted if it hangs.",
+        "Built a v1 harness with 8 toggleable components, switched each off one at a time across a 40-task benchmark, and compared against fair baselines (the bare model, and the bare model with the same compute spent on retries).",
+        "Committed a 30-task held-out split before building harness v2, so v2 couldn't be tuned on it.",
+        "Plain retries beat both harnesses, so the public demo ships retries, with a replay mode for devices without WebGPU."
+      ],
+      "evidence": {
+        "stack": [
+          "TypeScript",
+          "Vite",
+          "WebLLM",
+          "WebGPU",
+          "Pyodide",
+          "Playwright",
+          "GitHub Pages",
+          "Qwen2.5-Coder"
+        ],
+        "links": {
+          "repo": "https://github.com/Ayush1216/PocketAgent",
+          "live": "https://ayush1216.github.io/PocketAgent/"
+        },
+        "flow": [
+          {
+            "label": "Task",
+            "detail": "A Python function to write, with example tests. Hidden tests are kept back for grading."
+          },
+          {
+            "label": "Model writes code",
+            "detail": "Qwen2.5-Coder, 4-bit, on the visitor's GPU via WebLLM and WebGPU."
+          },
+          {
+            "label": "Sandbox runs it",
+            "detail": "Pyodide in a worker with no network. Hung code gets the worker killed and restarted."
+          },
+          {
+            "label": "Examples pass?",
+            "detail": "No: sample again with a new seed. Yes: stop.",
+            "note": "↺ retry until pass"
+          },
+          {
+            "label": "Final grade",
+            "detail": "Scored on the hidden tests the agent never saw."
+          }
+        ],
+        "flowSource": "README",
+        "languages": [
+          {
+            "name": "Python",
+            "percent": 38.7
+          },
+          {
+            "name": "TypeScript",
+            "percent": 36.2
+          },
+          {
+            "name": "JavaScript",
+            "percent": 15.1
+          },
+          {
+            "name": "HTML",
+            "percent": 9.1
+          },
+          {
+            "name": "Other",
+            "percent": 0.9
+          }
+        ],
+        "languagesSource": "GitHub languages API",
+        "screenshots": [
+          {
+            "src": "https://raw.githubusercontent.com/Ayush1216/PocketAgent/main/docs/demo.gif",
+            "alt": "Pocket Agent solving a task live: three failed attempts, then a fourth that passes the example tests and all hidden tests."
+          },
+          {
+            "src": "https://raw.githubusercontent.com/Ayush1216/PocketAgent/main/docs/chart-pass-rate-heldout.svg",
+            "alt": "Held-out pass rates: agent loop 57%, harness v2 77%, single attempt 67%, retry + check 87%."
+          }
+        ]
+      },
+      "verdict": [
+        "On 30 held-out tasks (Qwen2.5-Coder 1.5B, 4-bit), retry-until-examples-pass reached 87% vs 57% for the full agent loop (9 wins, 0 losses, p = 0.004).",
+        "With the right harness the 1.5B model matched the 3B model at 87% and ran about 3x faster.",
+        "Removing any one of the 8 agent features changed the result by at most one task.",
+        "1,020 benchmark runs on an 8 GB MacBook; 70 tasks with 403 hidden tests; all raw results committed."
+      ],
+      "inferred": false,
+      "sources": [
+        "README",
+        "docs/phase4-findings.md",
+        "commits 58834c4..3640a52",
+        "commit 8d4df4b",
+        "commit 89aea2a"
+      ],
+      "boardTags": [
+        "TypeScript",
+        "LLMs & Agents",
+        "Evaluation",
+        "Browser Automation"
+      ]
+    },
+    {
+      "caseNumber": "002",
+      "codename": "The Night the Star Left the Building",
+      "repo": "Ayush1216/Understudy",
+      "realTitle": "Understudy",
+      "oneLiner": "Computer-use automation where an LLM works out a legacy back-office UI flow once, and a typed, reviewable artifact replays it deterministically with no model in the loop.",
+      "status": "Closed",
+      "dateOpened": "2026-09",
+      "dateClosed": "2026-09",
+      "theProblem": "Banks and credit unions run a long tail of back-office apps with no API, where the only way in is to drive the UI like an operator. Calling a model on every run is slow, expensive and not reproducible.",
+      "investigation": [
+        "Defined the capability artifact contract first (typed, parameterised, versioned JSON), then built a deliberately hostile target app with timeouts, 500s, interstitials and tenant skins to replay against.",
+        "Anchored reads on stable structure (row \"Regular Shares\" × column \"Balance\"), so a flow recorded for one member replays for any other. Ambiguous matches refuse instead of guessing.",
+        "Irreversible steps escalate: the run parks and a human takes over the same live browser session, and on resume replay skips any step the human already did.",
+        "Secrets are referenced by name only and never written to artifacts, logs or screenshots."
+      ],
+      "evidence": {
+        "stack": [
+          "Python",
+          "Playwright",
+          "Pydantic",
+          "FastAPI",
+          "OpenAI-compatible API",
+          "pytest"
+        ],
+        "links": {
+          "repo": "https://github.com/Ayush1216/Understudy",
+          "live": ""
+        },
+        "flow": [
+          {
+            "label": "Goal",
+            "detail": "A plain-English task on a legacy back-office app, e.g. read a member's balance."
+          },
+          {
+            "label": "Discovery (once)",
+            "detail": "An LLM drives the real UI through Playwright, roughly 13 to 17 model turns."
+          },
+          {
+            "label": "Capability artifact",
+            "detail": "Typed, parameterised, versioned JSON that a human reviews."
+          },
+          {
+            "label": "Replay (every time)",
+            "detail": "Deterministic, no model, about half a second.",
+            "note": "stuck or risky? a human takes the live session"
+          },
+          {
+            "label": "Typed outputs",
+            "detail": "Success, a business outcome such as MEMBER_NOT_FOUND, or a clear failure."
+          }
+        ],
+        "flowSource": "README",
+        "languages": [
+          {
+            "name": "Python",
+            "percent": 92.7
+          },
+          {
+            "name": "HTML",
+            "percent": 4.0
+          },
+          {
+            "name": "Other",
+            "percent": 3.3
+          }
+        ],
+        "languagesSource": "GitHub languages API",
+        "screenshots": []
+      },
+      "verdict": [
+        "20 consecutive replays of alpha.member.balance: 20 successes, one distinct output, median 456 ms, worst 613 ms, zero model calls.",
+        "Discovery takes roughly 13 to 17 model turns once; every replay after that is model-free.",
+        "15 test files, including an assertion against the live app that an aborted transaction was never performed."
+      ],
+      "inferred": false,
+      "sources": [
+        "README",
+        "pyproject.toml",
+        "commits 2924aa9..c99649f"
+      ],
+      "boardTags": [
+        "Python",
+        "LLMs & Agents",
+        "Browser Automation",
+        "FastAPI"
+      ]
+    },
+    {
+      "caseNumber": "003",
+      "codename": "The Agent Who Was Handed Every Key",
+      "repo": "Ayush1216/SupportBotMCP",
+      "realTitle": "SupportBot Integrator",
+      "oneLiner": "A multi-agent customer-support desk on MCP where each agent's tool access is enforced at the tool boundary, not just requested in a prompt.",
+      "status": "Closed",
+      "dateOpened": "2026-08",
+      "dateClosed": "2026-08",
+      "theProblem": "Most agent-with-tools systems give one model every tool and trust the system prompt to keep it in line. Support desks need billing, account and knowledge-base actions kept separate and auditable.",
+      "investigation": [
+        "A LangGraph supervisor with zero tools routes each ticket to a billing, account or knowledge-base specialist. Each specialist owns its own MCP server, so other agents' tools never enter its prompt.",
+        "A call interceptor re-checks every request against one permission table, fails closed and writes denials to an audit log.",
+        "Built FailoverChatModel as a real chat-model class after a generic fallback wrapper silently dropped tools. It fails over only on rate limits, server errors and timeouts.",
+        "When both providers hit their daily caps mid-benchmark, the eval reported a confident but false result. The harness now separates provider errors from agent behaviour and refuses to publish a number it doesn't have."
+      ],
+      "evidence": {
+        "stack": [
+          "Python",
+          "LangGraph",
+          "LangChain",
+          "MCP",
+          "FastAPI",
+          "ChromaDB",
+          "SQLite",
+          "Streamlit"
+        ],
+        "links": {
+          "repo": "https://github.com/Ayush1216/SupportBotMCP",
+          "live": ""
+        },
+        "flow": [
+          {
+            "label": "Customer ticket",
+            "detail": "Opened by the orchestrator on intake."
+          },
+          {
+            "label": "Supervisor",
+            "detail": "Routes to billing, account or knowledge base. Holds zero tools."
+          },
+          {
+            "label": "Specialist agent",
+            "detail": "Sees only its own MCP server, so other tools are never in its prompt."
+          },
+          {
+            "label": "Interceptor",
+            "detail": "Re-checks every call against one permission table and fails closed.",
+            "note": "denials → audit log"
+          },
+          {
+            "label": "Resolve or escalate",
+            "detail": "Policy refusals come back with a hint; the graph hands off to a human."
+          }
+        ],
+        "flowSource": "README",
+        "languages": [
+          {
+            "name": "Python",
+            "percent": 100.0
+          }
+        ],
+        "languagesSource": "GitHub languages API",
+        "screenshots": []
+      },
+      "verdict": [
+        "Cut customer support resolution time by 38% with an MCP-powered multi-agent system that lets LLMs reach ticketing, billing and knowledge-base APIs through secure context sharing.",
+        "Increased automation coverage by 42% with FastAPI services and function calling, so agents handle password resets, refund requests and account lookups on their own.",
+        "75 tests passing, including one that gives the billing agent every server and asserts reset_password is still refused."
+      ],
+      "inferred": false,
+      "sources": [
+        "README",
+        "pyproject.toml",
+        "resume project bullets 1-2"
+      ],
+      "boardTags": [
+        "Python",
+        "LLMs & Agents",
+        "FastAPI",
+        "Vector Search",
+        "Evaluation"
+      ]
+    },
+    {
+      "caseNumber": "004",
+      "codename": "The Wardrobe That Read the Tabloids",
+      "repo": "Ayush1216/Fashion-outfit-generator",
+      "realTitle": "BuyMore: Conversational Fashion Outfit Generator",
+      "oneLiner": "An e-commerce prototype that suggests outfits from past purchases, stated preferences and scraped social-media trends, using vector search and an open-source LLM.",
+      "status": "Closed",
+      "dateOpened": "2023-08",
+      "dateClosed": "2023-10",
+      "theProblem": "Online fashion search returns single items, not coordinated outfits, and ignores current trends. Shoppers have to assemble looks themselves.",
+      "investigation": [
+        "Built a scalable e-commerce platform with an AI outfit generator and personalized recommendations via Pinecone vector search and a fine-tuned Falcon 7B.",
+        "Developed an automated ETL pipeline with Selenium, NLP and embedding search for real-time trend analysis."
+      ],
+      "evidence": {
+        "stack": [
+          "Python",
+          "React.js",
+          "Pinecone",
+          "FastAPI",
+          "Falcon 7B LLM",
+          "Selenium",
+          "Redis",
+          "MongoDB",
+          "Node.js"
+        ],
+        "links": {
+          "repo": "https://github.com/Ayush1216/Fashion-outfit-generator/tree/source_code",
+          "live": ""
+        },
+        "flow": [
+          {
+            "label": "Signals",
+            "detail": "Past purchases, stated preferences, and trends scraped from Instagram, Twitter and Google Trends."
+          },
+          {
+            "label": "ETL",
+            "detail": "Selenium scrapers, NLP and embeddings turn the signals into searchable vectors."
+          },
+          {
+            "label": "Vector search",
+            "detail": "Pinecone finds items that match the shopper and the trend."
+          },
+          {
+            "label": "Outfit generator",
+            "detail": "Fine-tuned Falcon 7B turns matches into conversational outfit suggestions."
+          },
+          {
+            "label": "Storefront",
+            "detail": "React storefront with cart and payment."
+          }
+        ],
+        "flowSource": "README + resume",
+        "screenshots": []
+      },
+      "verdict": [
+        "Boosted engagement by 20% with personalized recommendations from Pinecone vector search and fine-tuned Falcon 7B.",
+        "Reduced manual curation time by 70% with the automated trend-analysis ETL pipeline."
+      ],
+      "inferred": false,
+      "sources": [
+        "resume BuyMore bullets",
+        "README (problem statement)"
+      ],
+      "boardTags": [
+        "Python",
+        "FastAPI",
+        "React & Node",
+        "Vector Search",
+        "LLMs & Agents"
+      ]
+    },
+    {
+      "caseNumber": "005",
+      "codename": "The Receipt That Lied",
+      "repo": "Ayush1216/FinanceGuru",
+      "realTitle": "FinanceGuru",
+      "oneLiner": "A personal-finance platform that scores transactions for fraud in real time and categorizes spending with NLP to deliver personalized insights.",
+      "status": "Closed",
+      "dateOpened": "2023-09",
+      "dateClosed": "2023-09",
+      "theProblem": "People lose track of spending and miss fraudulent transactions until it's too late. FinanceGuru tracks transactions, flags fraud and turns spending data into insights and incentives.",
+      "investigation": [
+        "Trained an XGBoost model on transaction data and served it through real-time scoring pipelines.",
+        "Integrated spaCy NLP transaction categorization with the ML models in a Django backend, exposing personalized insights over REST APIs.",
+        "Shipped a gamified mobile client with transaction tracking, round-up micro-investing, budgeting and bill-payment alerts."
+      ],
+      "evidence": {
+        "stack": [
+          "Python",
+          "Django",
+          "spaCy",
+          "XGBoost",
+          "Flutter"
+        ],
+        "links": {
+          "repo": "https://github.com/Ayush1216/FinanceGuru",
+          "live": ""
+        },
+        "flow": [
+          {
+            "label": "Transactions",
+            "detail": "A user's card and account activity."
+          },
+          {
+            "label": "Fraud scoring",
+            "detail": "XGBoost scores each transaction in a real-time pipeline."
+          },
+          {
+            "label": "Categorization",
+            "detail": "spaCy NLP sorts spending into categories."
+          },
+          {
+            "label": "Django REST APIs",
+            "detail": "Serve scores, categories and insights."
+          },
+          {
+            "label": "Insights",
+            "detail": "Personalized budgeting insights and alerts in the app."
+          }
+        ],
+        "flowSource": "resume",
+        "screenshots": []
+      },
+      "verdict": [
+        "Improved fraud detection accuracy by 28% and cut false positives by 15%.",
+        "Boosted retention by 18%."
+      ],
+      "inferred": false,
+      "sources": [
+        "resume FinanceGuru bullets",
+        "README (app features)"
+      ],
+      "boardTags": [
+        "Python",
+        "Machine Learning",
+        "Django"
+      ]
+    },
+    {
+      "caseNumber": "006",
+      "codename": "The Smoke That Arrived on Schedule",
+      "repo": "Ayush1216/EmissionsPrediction",
+      "realTitle": "Emissions Predictor",
+      "oneLiner": "A CO2 emissions forecasting pipeline using an LSTM with attention, built to process 100M+ records for policy planning.",
+      "status": "Closed",
+      "dateOpened": "2023-05",
+      "dateClosed": "2023-05",
+      "theProblem": "Policy planners need accurate, timely CO2 emissions forecasts over very large datasets.",
+      "investigation": [
+        "Built an LSTM-with-attention forecasting pipeline in PyTorch.",
+        "Distributed processing with PySpark on AWS to handle 100M+ records.",
+        "Tracked experiments and CI/CD workflows with MLflow."
+      ],
+      "evidence": {
+        "stack": [
+          "Python",
+          "PyTorch",
+          "MLflow",
+          "PySpark",
+          "AWS"
+        ],
+        "links": {
+          "repo": "https://github.com/Ayush1216/EmissionsPrediction",
+          "live": ""
+        },
+        "flow": [
+          {
+            "label": "Emissions records",
+            "detail": "100M+ historical records."
+          },
+          {
+            "label": "Distributed processing",
+            "detail": "PySpark on AWS prepares the data."
+          },
+          {
+            "label": "Forecasting model",
+            "detail": "LSTM with attention in PyTorch."
+          },
+          {
+            "label": "Tracked pipeline",
+            "detail": "MLflow tracks experiments in the CI/CD workflow."
+          },
+          {
+            "label": "Forecasts",
+            "detail": "CO2 emissions forecasts for policy planning."
+          }
+        ],
+        "flowSource": "resume",
+        "screenshots": []
+      },
+      "verdict": [
+        "Improved CO2 emissions forecast accuracy by 22%.",
+        "Cut query execution times by 65% via MLflow-tracked CI/CD workflows."
+      ],
+      "inferred": false,
+      "sources": [
+        "resume Emissions Predictor bullets"
+      ],
+      "boardTags": [
+        "Python",
+        "Machine Learning",
+        "Data Pipelines",
+        "Cloud & Infra"
+      ]
+    },
+    {
+      "caseNumber": "007",
+      "codename": "The Containers That Wouldn't Stay Dead",
+      "repo": "Ayush1216/CloudFlow",
+      "realTitle": "CloudFlow",
+      "oneLiner": "A distributed Go/gRPC platform for deploying and running containerized services across a cluster, with Kafka event streaming and Kubernetes on AWS EKS.",
+      "status": "Closed",
+      "dateOpened": "2025-02",
+      "dateClosed": "2025-02",
+      "theProblem": "Deploying containerized services across machines and keeping them healthy usually means adopting a heavy orchestrator. CloudFlow handles deployment, healing and load balancing with a smaller, purpose-built control plane.",
+      "investigation": [
+        "Architected a distributed Go/gRPC backend with Kafka event streaming and PostgreSQL, defining content schemas and optimizing data flow.",
+        "Engineered scalable AWS EKS infrastructure via Kubernetes and CI/CD pipelines, with integrated observability tooling.",
+        "Split nodes into master (orchestration), builder (code to image, pushed to a registry) and worker (runs containers) roles.",
+        "Auto-heals dead containers, health-checks nodes, supports replicas, and load-balances on container health and stats."
+      ],
+      "evidence": {
+        "stack": [
+          "Go",
+          "gRPC",
+          "Kafka",
+          "PostgreSQL",
+          "AWS EKS",
+          "Kubernetes",
+          "CI/CD",
+          "Docker"
+        ],
+        "links": {
+          "repo": "https://github.com/Ayush1216/CloudFlow",
+          "live": ""
+        },
+        "flow": [
+          {
+            "label": "Deploy request",
+            "detail": "Queued as an event in Kafka."
+          },
+          {
+            "label": "Builder node",
+            "detail": "Turns code into an image and pushes it to the registry."
+          },
+          {
+            "label": "Master node",
+            "detail": "Picks a node by live health and load, and talks to every node over gRPC."
+          },
+          {
+            "label": "Worker nodes",
+            "detail": "Run the containers, with replicas and per-container domains.",
+            "note": "dead container? it's healed"
+          },
+          {
+            "label": "Infrastructure",
+            "detail": "Kubernetes on AWS EKS with CI/CD and observability."
+          }
+        ],
+        "flowSource": "README + resume",
+        "languages": [
+          {
+            "name": "Go",
+            "percent": 90.9
+          },
+          {
+            "name": "HTML",
+            "percent": 7.4
+          },
+          {
+            "name": "Other",
+            "percent": 1.6
+          }
+        ],
+        "languagesSource": "GitHub languages API",
+        "screenshots": []
+      },
+      "verdict": [
+        "Increased throughput by 30% by optimizing data flow.",
+        "Ensured 99.5% availability with EKS infrastructure and observability tooling."
+      ],
+      "inferred": false,
+      "sources": [
+        "resume project bullets",
+        "README (node roles, features)"
+      ],
+      "boardTags": [
+        "Go",
+        "Data Pipelines",
+        "Cloud & Infra"
+      ]
+    },
+    {
+      "caseNumber": "008",
+      "codename": "The Witness Who Made Things Up",
+      "repo": null,
+      "realTitle": "Multimodal LLM Evaluation & Optimization Framework",
+      "oneLiner": "A framework for evaluating vision-language and text LLMs on OCR and summarization, and for making their inference faster and more reliable.",
+      "status": "Closed",
+      "dateOpened": null,
+      "dateClosed": null,
+      "theProblem": "Choosing a model family for document OCR and summarization means comparing accuracy, hallucination and throughput tradeoffs on real documents, not leaderboard numbers.",
+      "investigation": [
+        "Evaluated vision-language and text LLMs in zero-shot and few-shot settings across OCR and summarization on 50K+ multimodal documents.",
+        "Optimized inference with vLLM, quantization and QLoRA.",
+        "Implemented LLM-as-a-Judge evaluation with DeepEval and RAGAS."
+      ],
+      "evidence": {
+        "stack": [
+          "Python",
+          "vLLM",
+          "QLoRA",
+          "DeepEval",
+          "RAGAS"
+        ],
+        "links": {
+          "repo": "",
+          "live": ""
+        },
+        "flow": [
+          {
+            "label": "Documents",
+            "detail": "50K+ multimodal documents for OCR and summarization."
+          },
+          {
+            "label": "Models under test",
+            "detail": "Vision-language and text LLMs in zero-shot and few-shot settings."
+          },
+          {
+            "label": "Faster inference",
+            "detail": "vLLM serving, quantization and QLoRA fine-tuning."
+          },
+          {
+            "label": "The judge",
+            "detail": "LLM-as-a-Judge scoring with DeepEval and RAGAS."
+          },
+          {
+            "label": "Tradeoffs",
+            "detail": "Accuracy, hallucination and throughput compared across model families."
+          }
+        ],
+        "flowSource": "resume",
+        "screenshots": []
+      },
+      "verdict": [
+        "Improved throughput by 2.1x.",
+        "Reduced hallucinations by 22%."
+      ],
+      "inferred": false,
+      "sources": [
+        "resume project bullets"
+      ],
+      "context": "Personal project, built during MS at USC",
+      "boardTags": [
+        "Python",
+        "LLMs & Agents",
+        "Evaluation"
+      ]
+    }
+  ],
+  "coldCases": [
+    {
+      "repo": "Ayush1216/Suvidha",
+      "title": "Suvidha",
+      "oneLiner": "MERN platform for NGOs: campaigns, events, an NGO locator map and child-abuse reporting.",
+      "stack": [
+        "MongoDB",
+        "Express",
+        "React",
+        "Node.js"
+      ],
+      "date": "2023-09",
+      "url": "https://github.com/Ayush1216/Suvidha"
+    },
+    {
+      "repo": "Ayush1216/FitVision",
+      "title": "FitVision",
+      "oneLiner": "Estimates body measurements and clothing size from a single smartphone photo using computer vision and Mask R-CNN.",
+      "stack": [
+        "Python",
+        "Mask R-CNN",
+        "Jupyter"
+      ],
+      "date": "2023-09",
+      "url": "https://github.com/Ayush1216/FitVision"
+    },
+    {
+      "repo": "Ayush1216/Potato-disease-classification",
+      "title": "Potato Disease Classification",
+      "oneLiner": "CNN that classifies potato leaves as early blight, late blight or healthy, at 98.96% validation accuracy.",
+      "stack": [
+        "Python",
+        "CNN",
+        "Jupyter"
+      ],
+      "date": "2023-09",
+      "url": "https://github.com/Ayush1216/Potato-disease-classification"
+    },
+    {
+      "repo": "Ayush1216/Twitter_sentiment_analysis",
+      "title": "Twitter Emotion Recognition",
+      "oneLiner": "Compares five classic ML models (decision tree, logistic regression, SVM, k-NN, naive Bayes) for 6-class emotion recognition on 10K tweets.",
+      "stack": [
+        "Python",
+        "scikit-learn",
+        "Jupyter"
+      ],
+      "date": "2023-05",
+      "url": "https://github.com/Ayush1216/Twitter_sentiment_analysis"
+    },
+    {
+      "repo": "Ayush1216/DataAnalyticsProject",
+      "title": "Sales Insights",
+      "oneLiner": "Sales data analysis in SQL with a Power BI dashboard.",
+      "stack": [
+        "MySQL",
+        "Power BI"
+      ],
+      "date": "2023-05",
+      "url": "https://github.com/Ayush1216/DataAnalyticsProject"
+    },
+    {
+      "repo": "Ayush1216/MachineLearningProjects",
+      "title": "ML Notebooks",
+      "oneLiner": "Loan repayment prediction and employee turnover prediction with scikit-learn.",
+      "stack": [
+        "Python",
+        "scikit-learn",
+        "Jupyter"
+      ],
+      "date": "2023-05",
+      "url": "https://github.com/Ayush1216/MachineLearningProjects"
+    }
+  ]
+}

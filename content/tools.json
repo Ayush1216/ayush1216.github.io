@@ -1,0 +1,505 @@
+{
+  "_note": "The Locked Drawer. weight = how many roles and projects mention the tool; level (1-3) sets the dots; usedIn is the hover text. Edit freely.",
+  "categories": [
+    {
+      "name": "Languages",
+      "items": [
+        {
+          "name": "Python",
+          "weight": 11,
+          "level": 3,
+          "usedIn": [
+            "BuyMore",
+            "Emissions Predictor",
+            "FinanceGuru",
+            "FitVision",
+            "LifeSizeAgent AI",
+            "ML Notebooks",
+            "Multimodal LLM Evaluation & Optimization Framework",
+            "Potato Disease Classification",
+            "SupportBot Integrator",
+            "Twitter Emotion Recognition",
+            "Understudy"
+          ]
+        },
+        {
+          "name": "SQL",
+          "weight": 5,
+          "level": 3,
+          "usedIn": [
+            "CloudFlow",
+            "Easely Dunn Productions",
+            "Frictionless Intelligence",
+            "Pro Thoughts Solutions",
+            "Sales Insights"
+          ]
+        },
+        {
+          "name": "JavaScript",
+          "weight": 4,
+          "level": 2,
+          "usedIn": [
+            "BuyMore",
+            "LifeSizeAgent AI",
+            "Suvidha",
+            "University of Southern California (SCEC)"
+          ]
+        },
+        {
+          "name": "Go",
+          "weight": 2,
+          "level": 1,
+          "usedIn": [
+            "CloudFlow",
+            "Easely Dunn Productions"
+          ]
+        },
+        {
+          "name": "TypeScript",
+          "weight": 2,
+          "level": 1,
+          "usedIn": [
+            "Frictionless Intelligence",
+            "Pocket Agent"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Frontend",
+      "items": [
+        {
+          "name": "React",
+          "weight": 4,
+          "level": 2,
+          "usedIn": [
+            "BuyMore",
+            "LifeSizeAgent AI",
+            "Suvidha",
+            "University of Southern California (SCEC)"
+          ]
+        },
+        {
+          "name": "Next.js",
+          "weight": 3,
+          "level": 2,
+          "usedIn": [
+            "Easely Dunn Productions",
+            "Frictionless Intelligence",
+            "University of Southern California (SCEC)"
+          ]
+        },
+        {
+          "name": "Vite",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "Pocket Agent"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Backend & APIs",
+      "items": [
+        {
+          "name": "FastAPI",
+          "weight": 4,
+          "level": 2,
+          "usedIn": [
+            "BuyMore",
+            "LifeSizeAgent AI",
+            "SupportBot Integrator",
+            "Understudy"
+          ]
+        },
+        {
+          "name": "REST APIs",
+          "weight": 3,
+          "level": 2,
+          "usedIn": [
+            "FinanceGuru",
+            "LifeSizeAgent AI",
+            "University of Southern California (SCEC)"
+          ]
+        },
+        {
+          "name": "Django",
+          "weight": 2,
+          "level": 1,
+          "usedIn": [
+            "Easely Dunn Productions",
+            "FinanceGuru"
+          ]
+        },
+        {
+          "name": "Node.js",
+          "weight": 2,
+          "level": 1,
+          "usedIn": [
+            "Suvidha",
+            "University of Southern California (SCEC)"
+          ]
+        },
+        {
+          "name": "GraphQL",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "Frictionless Intelligence"
+          ]
+        },
+        {
+          "name": "gRPC",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "CloudFlow"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "AI / LLM",
+      "items": [
+        {
+          "name": "LangChain",
+          "weight": 3,
+          "level": 2,
+          "usedIn": [
+            "Frictionless Intelligence",
+            "LifeSizeAgent AI",
+            "SupportBot Integrator"
+          ]
+        },
+        {
+          "name": "OpenAI API",
+          "weight": 3,
+          "level": 2,
+          "usedIn": [
+            "Easely Dunn Productions",
+            "Frictionless Intelligence",
+            "Understudy"
+          ]
+        },
+        {
+          "name": "Pydantic",
+          "weight": 2,
+          "level": 1,
+          "usedIn": [
+            "Easely Dunn Productions",
+            "Understudy"
+          ]
+        },
+        {
+          "name": "Qwen3-VL / Qwen",
+          "weight": 2,
+          "level": 1,
+          "usedIn": [
+            "Easely Dunn Productions",
+            "Pocket Agent"
+          ]
+        },
+        {
+          "name": "RAG",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "LifeSizeAgent AI"
+          ]
+        },
+        {
+          "name": "MCP",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "SupportBot Integrator"
+          ]
+        },
+        {
+          "name": "vLLM",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "Multimodal LLM Evaluation & Optimization Framework"
+          ]
+        },
+        {
+          "name": "QLoRA",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "Multimodal LLM Evaluation & Optimization Framework"
+          ]
+        },
+        {
+          "name": "DeepEval",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "Multimodal LLM Evaluation & Optimization Framework"
+          ]
+        },
+        {
+          "name": "WebLLM / WebGPU",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "Pocket Agent"
+          ]
+        },
+        {
+          "name": "Ollama",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "LifeSizeAgent AI"
+          ]
+        },
+        {
+          "name": "Falcon 7B",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "BuyMore"
+          ]
+        },
+        {
+          "name": "spaCy",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "FinanceGuru"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ML & Data",
+      "items": [
+        {
+          "name": "scikit-learn / XGBoost",
+          "weight": 4,
+          "level": 2,
+          "usedIn": [
+            "FinanceGuru",
+            "ML Notebooks",
+            "Pro Thoughts Solutions",
+            "Twitter Emotion Recognition"
+          ]
+        },
+        {
+          "name": "Power BI",
+          "weight": 2,
+          "level": 1,
+          "usedIn": [
+            "Pro Thoughts Solutions",
+            "Sales Insights"
+          ]
+        },
+        {
+          "name": "Computer vision (CNN, Mask R-CNN)",
+          "weight": 2,
+          "level": 1,
+          "usedIn": [
+            "FitVision",
+            "Potato Disease Classification"
+          ]
+        },
+        {
+          "name": "PyTorch",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "Emissions Predictor"
+          ]
+        },
+        {
+          "name": "TensorFlow / Keras",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "Pro Thoughts Solutions"
+          ]
+        },
+        {
+          "name": "pandas / NumPy",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "Pro Thoughts Solutions"
+          ]
+        },
+        {
+          "name": "MLflow",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "Emissions Predictor"
+          ]
+        },
+        {
+          "name": "PySpark",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "Emissions Predictor"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Data stores",
+      "items": [
+        {
+          "name": "PostgreSQL",
+          "weight": 3,
+          "level": 2,
+          "usedIn": [
+            "CloudFlow",
+            "Easely Dunn Productions",
+            "Frictionless Intelligence"
+          ]
+        },
+        {
+          "name": "Redis",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "Easely Dunn Productions"
+          ]
+        },
+        {
+          "name": "MongoDB",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "Suvidha"
+          ]
+        },
+        {
+          "name": "Pinecone",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "BuyMore"
+          ]
+        },
+        {
+          "name": "ChromaDB",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "LifeSizeAgent AI"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Cloud & Infra",
+      "items": [
+        {
+          "name": "AWS (S3, SQS, Lambda, EC2, EKS)",
+          "weight": 5,
+          "level": 3,
+          "usedIn": [
+            "CloudFlow",
+            "Easely Dunn Productions",
+            "Emissions Predictor",
+            "Frictionless Intelligence",
+            "University of Southern California (SCEC)"
+          ]
+        },
+        {
+          "name": "Kubernetes",
+          "weight": 2,
+          "level": 1,
+          "usedIn": [
+            "CloudFlow",
+            "Frictionless Intelligence"
+          ]
+        },
+        {
+          "name": "Kafka",
+          "weight": 2,
+          "level": 1,
+          "usedIn": [
+            "CloudFlow",
+            "Frictionless Intelligence"
+          ]
+        },
+        {
+          "name": "CI/CD",
+          "weight": 2,
+          "level": 1,
+          "usedIn": [
+            "CloudFlow",
+            "Emissions Predictor"
+          ]
+        },
+        {
+          "name": "Docker",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "Frictionless Intelligence"
+          ]
+        },
+        {
+          "name": "Terraform",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "Frictionless Intelligence"
+          ]
+        },
+        {
+          "name": "Grafana",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "Easely Dunn Productions"
+          ]
+        },
+        {
+          "name": "CloudWatch",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "Frictionless Intelligence"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Testing & Automation",
+      "items": [
+        {
+          "name": "Playwright",
+          "weight": 2,
+          "level": 1,
+          "usedIn": [
+            "Pocket Agent",
+            "Understudy"
+          ]
+        },
+        {
+          "name": "pytest",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "Understudy"
+          ]
+        },
+        {
+          "name": "Selenium",
+          "weight": 1,
+          "level": 1,
+          "usedIn": [
+            "BuyMore"
+          ]
+        }
+      ]
+    }
+  ]
+}
