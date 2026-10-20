@@ -85,7 +85,7 @@ A **private** repo can only publish Pages on GitHub Pro, Team or Enterprise; on 
 1. Choose the URL:
    - **User site** (`https://ayush1216.github.io`): name the repo `Ayush1216.github.io` and build with the default base path.
    - **Project site** (`https://ayush1216.github.io/<repo>/`): build with `BASE_PATH=/<repo>/`.
-2. Add `.github/workflows/pages.yml` (this repo already has one, set up for `/Portfolio/`):
+2. Add `.github/workflows/pages.yml` (this repo already has one: it's the user site `Ayush1216.github.io`, served at the root):
 
    ```yaml
    name: Deploy to Pages

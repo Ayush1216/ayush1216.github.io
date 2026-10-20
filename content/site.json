@@ -1,5 +1,5 @@
 {
-  "_note": "url = the site's origin only (no path, no trailing slash). The path comes from BASE_PATH at build time (/Portfolio/ on GitHub Pages).",
+  "_note": "url = the site's origin only (no path, no trailing slash). The path comes from BASE_PATH at build time (/ for this user site).",
   "url": "https://ayush1216.github.io",
   "title": "Case Files · Ayush Parikh",
   "description": "Ayush Parikh, Software Engineer (AI/ML + backend systems). Eight closed cases: AI agents, LLM evaluation, distributed systems and ML pipelines."
