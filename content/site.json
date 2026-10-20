@@ -1,6 +1,6 @@
 {
-  "_note": "Set url to the deployed origin (no trailing slash), e.g. https://ayush1216.github.io/portfolio or https://case-files.vercel.app. Used for canonical links, Open Graph images and the sitemap.",
-  "url": "",
+  "_note": "url = the site's origin only (no path, no trailing slash). The path comes from BASE_PATH at build time (/Portfolio/ on GitHub Pages).",
+  "url": "https://ayush1216.github.io",
   "title": "Case Files · Ayush Parikh",
   "description": "Ayush Parikh, Software Engineer (AI/ML + backend systems). Eight closed cases: AI agents, LLM evaluation, distributed systems and ML pipelines."
 }
